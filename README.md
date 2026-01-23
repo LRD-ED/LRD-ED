@@ -96,3 +96,5 @@ javax.swing.JFrame
 javax.swing.JOptionPane
 
 Maven se encarga de la compilación, organización del proyecto y ejecución de la aplicación mediante su estructura y plugins por defecto.
+
+Grabación de pantalla 2026-01-23 003950.gif
