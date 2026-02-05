@@ -98,3 +98,38 @@ javax.swing.JOptionPane
 Maven se encarga de la compilación, organización del proyecto y ejecución de la aplicación mediante su estructura y plugins por defecto.
 
 Grabación de pantalla 2026-01-23 003950.gif
+
+
+
+Proyecto de Depuración Java
+1. Instalación y Ejecución
+Clonar: git clone
+
+Compilar: mvn clean compile
+
+Ejecutar: Abrir Main.java y pulsar F5 en VS Code (o usar el comando mvn exec:java -Dexec.mainClass="com.miempresa.app.Main").
+
+2. Errores y Soluciones
+Error 1: División por Cero
+Fallo: ArithmeticException al dividir entre 0 en Calculadora.java.
+
+Depuración: Localizado con Breakpoints viendo que la variable b era 0 en el panel de Variables.
+
+Solución: Se añadió un if (b == 0) para evitar el cálculo y devolver 0.
+
+Error 2: Puntero Nulo
+Fallo: NullPointerException en Utils.java al usar .length() en un texto null.
+
+Depuración: Identificado rastreando el flujo en el Call Stack (Pila de llamadas).
+
+Solución: Se añadió un if (texto == null) para validar la variable antes de medirla.
+
+3. Dependencias
+Maven: Gestiona la estructura del proyecto y la compilación.
+
+Java JDK 17: Versión del lenguaje utilizada.
+
+Swing (JOptionPane): Librería nativa usada para mostrar la ventana emergente de "Hola Mundo".
+
+Resultado Esperado
+Al ejecutar la versión corregida, la aplicación ya no se cierra; procesa los datos y muestra una ventana con el mensaje "Hola Mundo".
