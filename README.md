@@ -133,3 +133,43 @@ Swing (JOptionPane): Librería nativa usada para mostrar la ventana emergente de
 
 Resultado Esperado
 Al ejecutar la versión corregida, la aplicación ya no se cierra; procesa los datos y muestra una ventana con el mensaje "Hola Mundo".
+
+
+------------------------------------------------------------------TAREA 12.1-------------------------------------------------------------------------------------
+
+Este proyecto consiste en la automatización de dos procesos clave en el sistema de gestión de recursos humanos OrangeHRM. El objetivo principal fue validar que el sistema permite crear un empleado y, posteriormente, asignarle múltiples componentes salariales de forma correcta.
+
+Para que este robot funcione, se han utilizado las siguientes "piezas":
+
+Java: El lenguaje de programación (el cerebro).
+
+Selenium WebDriver: La herramienta que mueve el ratón y escribe en el navegador.
+
+TestNG: El marco que organiza las pruebas y nos dice si han pasado o han fallado.
+
+Maven: El encargado de descargar todas las librerías necesarias automáticamente.
+
+Proceso de Ejecución 
+1. Creación del Empleado (Precondición)
+Primero, el robot entra al sistema con las credenciales de administrador. Navega al módulo PIM, rellena los datos básicos de un nuevo empleado (Nombre y Apellido) y guarda los cambios. Este paso es fundamental porque sin un empleado, no podemos asignar salarios.
+
+2. Asignación de Múltiples Salarios
+Una vez creado el empleado, el robot:
+
+Lo busca en la lista general para entrar a su perfil.
+
+Accede a la pestaña Salary.
+
+Añade un "Salario Base" de $30,000.
+
+Añade un "Bono Anual" de $5,000.
+
+Verifica que ambos registros queden guardados en la tabla del empleado.
+
+Durante el desarrollo, nos encontramos con varios obstáculos técnicos que logramos solucionar:
+
+El problema de los botones "fantasma": OrangeHRM tiene muchos botones de "Guardar" que se llaman igual. Para solucionarlo, creamos una ruta específica (XPath) que le dice al robot: "Dale al botón de guardar que está SOLO dentro de la caja de salarios".
+
+Listas desplegables rebeldes: Seleccionar la moneda a veces fallaba porque la lista tardaba en cargar. Lo solucionamos usando comandos de teclado (flecha abajo y Enter), lo cual es mucho más fiable que intentar hacer clic en el texto.
+
+Sincronización: El robot es más rápido que la página web. Añadimos esperas inteligentes para que el robot aguante unos segundos hasta que los mensajes de éxito desaparezcan antes de intentar hacer la siguiente acción.
