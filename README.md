@@ -173,3 +173,50 @@ El problema de los botones "fantasma": OrangeHRM tiene muchos botones de "Guarda
 Listas desplegables rebeldes: Seleccionar la moneda a veces fallaba porque la lista tardaba en cargar. Lo solucionamos usando comandos de teclado (flecha abajo y Enter), lo cual es mucho más fiable que intentar hacer clic en el texto.
 
 Sincronización: El robot es más rápido que la página web. Añadimos esperas inteligentes para que el robot aguante unos segundos hasta que los mensajes de éxito desaparezcan antes de intentar hacer la siguiente acción.
+
+
+--------------------------------------------ACT 12.2----------------------------------------------------------------------------------------------------
+
+# Proyecto de Automatización de Pruebas: Módulos Admin, PIM y Leave (OrangeHRM)
+
+Este proyecto contiene el diseño, la documentación y la automatización de la suite de pruebas funcionales para la plataforma **OrangeHRM** (Demo Open Source), abarcando los módulos críticos de **Administración (Admin)**, **Gestión de Personal (PIM)** y **Control de Ausencias (Leave)**.
+
+El objetivo principal es asegurar la estabilidad de los flujos de trabajo mediante la creación de scripts robustos e inmunes a fallos dinámicos de la interfaz.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+* **Lenguaje:** Java 11 / 17
+* **Framework de Pruebas:** JUnit 5 / TestNG (IntelliJ IDEA)
+* **Automatización del Navegador:** Selenium WebDriver (Chrome Driver)
+* **Patrón de Sincronización:** Explicit Waits (`WebDriverWait`) para el manejo seguro de componentes asíncronos y listas flotantes.
+
+---
+
+## 📋 Cobertura de la Suite de Pruebas (Test Cases)
+
+El proyecto cuenta con un total de **10 Casos de Prueba (TC)** completamente automatizados, diseñados bajo una estricta separación de acciones y condiciones de verificación:
+
+| TestID | Módulo | Nombre del Caso de Prueba | Descripción / Acción Clave |
+| :--- | :--- | :--- | :--- |
+| **TC01** | Auth | Login Exitoso | Validación del acceso al panel principal (`Dashboard`). |
+| **TC02** | Admin | Creación de Job Title | Alta de un nuevo puesto de trabajo y verificación en la tabla. |
+| **TC03** | Admin | Creación de Nacionalidad | Registro dinámico inmune a duplicados utilizando sufijos aleatorios. |
+| **TC04** | Admin | Edición de Información General | Activación del *toggle* de edición y actualización del número de registro empresarial. |
+| **TC05** | PIM | Creación de Empleado con Credenciales | Alta completa en el sistema expandiendo el formulario de seguridad (Usuario/Password). |
+| **TC06** | PIM | Búsqueda de Informes de Empleado | Manejo de selectores dinámicos y autocompletado (`Type for hints...`). |
+| **TC07** | PIM | Búsqueda y Eliminación de Empleado | Flujo completo de borrado interactuando con modales de confirmación (`Yes, Delete`). |
+| **TC08** | Leave | Consulta de Asignaciones de Empleado | Control avanzado de menús desplegables basados en contenedores `div` flotantes. |
+| **TC09** | Leave | Generación de Informe de Ausencias | Filtrado por tipología de baja y renderizado del contenedor de resultados (`Generate`). |
+| **TC10** | Leave | Asignación Exitosa de Ausencia | Flujo corregido contra duplicados de fecha (limpieza por emulación de teclado) y control de saldos. |
+
+---
+
+## 🚀 Estrategias de Robustez Implementadas (Anti-Fallos)
+
+Durante el desarrollo se identificaron comportamientos dinámicos complejos en OrangeHRM que hacían que las pruebas convencionales fallaran. Se aplicaron las siguientes soluciones técnicas:
+1. **Borrado Agresivo de Calendarios:** Ante el bloqueo del método `.clear()` nativo de Selenium en los campos de fecha, se implementó una simulación humana mediante comandos de teclado (`CONTROL + A` + `BACK_SPACE`) para evitar la duplicación de cadenas de texto.
+2. **Captura de Listbox Flotantes:** Las sugerencias de nombres y desplegables no usan elementos HTML `<select>` estándar. Se controlaron mediante esperas explícitas de visibilidad sobre contenedores con `role='listbox'` y clics directos sobre sus nodos hijos indexados o por texto.
+3. **Mapeo Riguroso (Normas de Uso):** El diseño de la suite de pruebas se ciñe estrictamente a la separación de **StepAction** (*Pulsar*, *Escribir*, *Seleccionar*) y **StepCondition** (*Comprobar que...*), garantizando una documentación 1:1 con el código de Selenium.
+
